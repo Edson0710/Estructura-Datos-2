@@ -29,6 +29,7 @@ class AVL{
         void preorden(shared_ptr<Node> & root);
         void postorden(shared_ptr<Node> & root);
         void guardar(shared_ptr<Node> & root, fstream & archivo);
+        T* buscar(shared_ptr<Node> & root, char *nombre);
     public:
         AVL(){
             raiz = nullptr;
@@ -43,6 +44,7 @@ class AVL{
         void postorden();
         void guardar();
         void recuperar();
+        T* buscar(char *nombre);
 };
 
 template<typename T>
@@ -111,6 +113,29 @@ void AVL<T>::postorden(shared_ptr<Node> &root){
 }
 
 template<typename T>
+T* AVL<T>::buscar(char *nombre){
+    return buscar(raiz, nombre);
+}
+
+template<typename T>
+T* AVL<T>::buscar(shared_ptr<Node> & root,char *nombre){
+    T element;
+    element.setNombre(nombre);
+    if(!root){
+        return nullptr;
+    }
+    else if(element < root->data){
+        return buscar(root->izq, nombre);
+    }
+    else if(element > root->data){
+        return buscar(root->der, nombre);
+    }
+    else{
+        return &root->data;
+    }
+}
+
+template<typename T>
 void AVL<T>::guardar(){
     fstream archivo;
     archivo.open("file01.bin", ios::binary | ios::out | ios::trunc);
@@ -141,11 +166,20 @@ void AVL<T>::recuperar(){
         cout << "Error al recuperar el archivo" << endl;
     }
     else{
+        // archivo.read((char *)&e, sizeof(Equipos));
+        // archivo.read((char *)&e2, sizeof(Equipos));
+        // cout << e << endl;
+        // cout << e2 << endl;
+        
+        T equipo;
         archivo.seekg(0);
-        archivo.read((char *)&e, sizeof(Equipos));
-        archivo.read((char *)&e2, sizeof(Equipos));
-        cout << e << endl;
-        cout << e2 << endl;
+        while(true){
+            archivo.read((char *)&equipo, sizeof(Equipos));
+            this->insert(equipo);
+            if(archivo.eof()){
+                break;
+            }
+        }
         archivo.close();
     }
 }

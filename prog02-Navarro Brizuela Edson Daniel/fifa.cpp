@@ -40,8 +40,18 @@ void Fifa::menu(){
             case 4:
                 arbol.postorden();
                 break;
-            case 5:
+            case 5:{
+                char nombre[20];
+                cin.getline(nombre, 20);
+                Equipos* e = arbol.buscar(nombre);
+                if(e == nullptr){
+                    cout << "El equipo no ha sido encontrado"<< endl;
+                }
+                else{
+                    cout << *e;
+                }
                 break;
+            }
             case 6:
                 arbol.guardar();
                 break;
