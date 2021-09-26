@@ -28,7 +28,7 @@ void Fifa::menu(){
         switch (op){
             case 1:
                 cin >> e;
-                arbol.insert(e);
+                arbol.raiz = arbol.insert(e);
                 cout << "Insertado con exito" << endl;
                 break;
             case 2:
