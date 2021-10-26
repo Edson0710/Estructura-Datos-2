@@ -1,0 +1,3 @@
+3
+1|Guadalajara|Mexico*2|CDMX|Mexico*3|Madrid|Espa¤a*
+1|2|255*1|3|12345*2|3|12246*
