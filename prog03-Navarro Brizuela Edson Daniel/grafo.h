@@ -102,47 +102,6 @@ bool Grafo<T>::guardar(){
     return false;
 }
 
-template<typename T>
-bool Grafo<T>::cargar(){
-    fstream archivo;
-    archivo.open("file01.txt", ios::in);
-    if(archivo.is_open()){
-        int size;
-        string aux;
-        T dato;
-        getline(archivo, aux, '\n');
-        size = stoi(aux);
-        int id;
-        string ciudad, pais;
-        for(size_t i = 0; i < size; i++){
-            getline(archivo, aux, '|');
-            getline(archivo, ciudad, '|');
-            getline(archivo, pais, '*');
-            dato.setId(stoi(aux));
-            dato.setCiudad(ciudad);
-            dato.setPais(pais);
-            vertices.push_back(dato);
-        }
-        getline(archivo, aux, '\n');
-        while(true){
-            getline(archivo, aux, '|');
-            if(aux.empty()){
-                break;
-            }
-            else{
-                int origen, destino, peso;
-                origen = stoi(aux);
-                getline(archivo, aux, '|');
-                destino = stoi(aux);
-                getline(archivo, aux, '*');
-                peso = stoi(aux);
-                agregarArista(Aeropuerto(origen), Aeropuerto(destino), peso);
-            }
-        }
-        archivo.close();
-        return true;
-    }
-    return false;
-}
+b
 
 #endif
